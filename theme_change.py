@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 
 layout = [
-    [sg.Text("Wooordle", font='_21'), sg.Text('Teman: ', font='_19'), sg.B('Dark Purple', key='darkpurple6_button'), sg.B('Light Blue', key='lightblue_button'), sg.B('Bright Colors', key='brightcolors_button'), sg.B('Dark Blue', key='darkblue')], 
+    [sg.Text("Wooordle", font='_21')], #sg.Text('Teman: ', font='_19'), sg.B('Dark Purple', key='darkpurple6_button'), sg.B('Light Blue', key='lightblue_button'), sg.B('Bright Colors', key='brightcolors_button'), sg.B('Dark Blue', key='darkblue')], 
     [sg.HorizontalSeparator(color='black')],
     [sg.Text('', key='string1')],
     [sg.HorizontalSeparator(color='black')],
@@ -26,12 +26,11 @@ layout = [
 def make_window_theme(theme=None):
     if theme:
         sg.theme(theme)
-        sg.Window("Wordle SE", layout, finalize=True)
-    
-    layout2 = [[sg.T('This is your layout')],
-              [sg.Button('Ok'), sg.Button('Change Theme'), sg.Button('Exit')]]
+        window = sg.Window("Wordle SE", layout, finalize=True)
+    layout2 = [[sg.T('Denna ruta representerar valt tema')],
+              [sg.Button('Ok'), sg.Button('Ändra tema'), sg.Button('Avsluta')]]
 
-    return sg.Window('Pattern for changing theme', layout2)
+    return sg.Window('Wordle Wizard', layout2)
 
 
 def main_theme():
@@ -41,8 +40,8 @@ def main_theme():
         event, values = window_theme.read()
         if event == sg.WINDOW_CLOSED or event == 'Exit':
             break
-        if event == 'Change Theme':
-            event, values = sg.Window('Choose Theme',
+        if event == 'Ändra tema':
+            event, values = sg.Window('Ändra tema',
                                       [[sg.Combo(sg.theme_list(), readonly=True, k='-THEME LIST-'), sg.OK(), sg.Cancel()]]
                                       ).read(close=True)
             if event == 'OK':
