@@ -21,7 +21,7 @@ def stringlayout():
 layout = [
     
     [sg.Text("Wooordle", font='_21')], 
-    # [sg.B('Inställningar', bind_return_key=True, key='inställningar_button')],
+    [sg.B('Inställningar', key='inställningar_button')],
     [sg.HorizontalSeparator(color='black')],
     [sg.Text('', key='string1')],
     [sg.HorizontalSeparator(color='black')],
