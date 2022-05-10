@@ -7,25 +7,15 @@ from open_hiscore import open_hiscore
 #from word_eva import answer_list_converter,guess_split   #high score, snyggt uppdelat för A
 
 game = SwedishWordle.Game(5) # skapa ett nytt wordlespel med ord som är 5 långa
-
-sg.theme('Dark Blue')
+theme = 'Dark Blue'
+sg.theme(theme)
 
 def TextChar(value, key):
     return sg.Input(value, key=key, font='Courier 22', size=(10,100),  disabled_readonly_background_color='gray', border_width=5,  p=1, enable_events=True, disabled=True)
 
-
-
-""""
-def stringlayout():
-    for i in range(7):
-        [sg.HorizontalSeparator(color='black')],
-        [sg.Text('', key='string'+i)],
-       
-    """ 
 layout = [
    
-    [sg.Text("Wooordle", font='_21')], 
-    [sg.B('Inställningar', key='inställningar_button')],
+    [sg.Text("Wooordle", font='_21'), sg.Text('Teman: '), sg.B('Dark Purple', key='darkpurple6_button'), sg.B('Light Blue', key='lightblue_button'), sg.B('Bright Colors', key='brightcolors_button'), sg.B('Dark Blue', key='darkblue')], 
     [sg.HorizontalSeparator(color='black')],
     [sg.Text('', key='string1')],
     [sg.HorizontalSeparator(color='black')],
@@ -52,11 +42,9 @@ layout2 = [
     
     [sg.Text("Ändra tema", font='_21')],
     [sg.HorizontalSeparator(color='black')],
-    [sg.B('Dark Purple', bind_return_key=True, key='darkpurple6_button')], [sg.B('Light Blue', bind_return_key=True, key='lightblue_button')], [sg.B('Bright Colors', bind_return_key=True, key='brightcolors_button')]
-   
+    [sg.B('Dark Purple', key='darkpurple6_button')], [sg.B('Light Blue', key='lightblue_button')], [sg.B('Bright Colors', key='brightcolors_button')]
     
     ]
-
 """
 window = sg.Window("Wordle SE", layout, finalize=True)
 
@@ -76,37 +64,47 @@ while True:
     event, values = window.read()
     guess = values['input_box']
    
-    if len(guess) != 5 and i <=5:
-        window['string'+str(i)].update("Felaktig längd på ord. Du gissade " + guess + ". Detta spel är om ord som är 5 i längd")
-        continue
+    if event == "darkpurple6_button":
+        theme = 'Dark Purple 6'
 
-    elif event == "confirm_button" and i <= 5:
-        if i == 5:
-            window['string'+str(6)].update("Choktorsk bram")
-            score_update()
-        answer = game.Guess(guess)
-        guess_split = guess.split()  #Skall bli funktion
-        score = score + sum(answer)
-        window['string'+str(i)].update((answer,guess_split))
-        score_update()
-        i += 1
-
-    elif answer == [0,0,0,0,0]:
-        window['string'+str(6)].update("Knasvinst län")
-        score_update()
-        
-    elif answer != [0,0,0,0,0] and event == sg.WIN_CLOSED:
-        #värdet 99 ges till den som inte klara spelet, toppliste är för de som lyckas
-        score = 99
-        break
+    elif event == "lightblue_button":
+        theme = 'Light Blue'
     
-    elif event == sg.WIN_CLOSED:
-        break
+    elif event == "brightcolors_button":
+        theme = 'Bright Colors'
 
-"""
-    if event == "inställningar_button":
-        window_inställningar = sg.Window("Inställningar", layout2, finalize=True)
-        """
+    elif event == "darkblue":
+        theme = 'Bright Colors'
+
+    else:
+        if len(guess) != 5 and i <=5 and event == "confirm_button":
+            window['string'+str(i)].update("Felaktig längd på ord. Du gissade " + guess + ". Detta spel är om ord som är 5 i längd")
+            continue
+
+        elif event == "confirm_button" and i <= 5:
+            if i == 5:
+                window['string'+str(6)].update("Choktorsk bram")
+                score_update()
+            answer = game.Guess(guess)
+            guess_split = guess.split()  #Skall bli funktion
+            score = score + sum(answer)
+            window['string'+str(i)].update((answer,guess_split))
+            score_update()
+            i += 1
+
+        elif answer == [0,0,0,0,0]:
+            window['string'+str(6)].update("Knasvinst län")
+            score_update()
+            
+        elif answer != [0,0,0,0,0] and event == sg.WIN_CLOSED:
+            #värdet 99 ges till den som inte klara spelet, toppliste är för de som lyckas
+            score = 99
+            break
+        
+        elif event == sg.WIN_CLOSED:
+            break
+
+    
 
 file_score_upd(score)
 
