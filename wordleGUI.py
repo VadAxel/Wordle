@@ -1,7 +1,8 @@
 import PySimpleGUI as sg
 import SwedishWordle
 from start_layout import TextChar
-
+from file_score_upd import file_score_upd
+from open_hiscore import open_hiscore
 
 #from word_eva import answer_list_converter,guess_split   #high score, snyggt uppdelat för A
 
@@ -56,24 +57,12 @@ layout2 = [
 """
 window = sg.Window("Wordle SE", layout, finalize=True)
 
-def open_score():
-    top_3 = ""
-    file = open("score.txt", "r") #Öppnar
-    readthefile = file.readlines() #Läser
-    sortedData = sorted(readthefile) #Sorterar, lägst till störst
-    
-    for line in range(3): #Väljer de tre lägsta värdena
-        top_list = str("Pos\tPoints\n" + str(line+1)+"\t"+str(sortedData[line]))
-        top_3 = top_3 + top_list
-    return top_3
-
-top_3 = open_score()
+#Definierar top_3 mha funktionen
+top_3 = open_hiscore() 
 
 def score_update():
     window['yiscore'].update(score)
     window['High_Score'].update((top_3))
-
-
 
 score = 0 #Score på varje enskilt game
 i = 1 #Ta bort, kanske använda "game"
@@ -110,12 +99,8 @@ while True:
     if event == "inställningar_button":
         window_inställningar = sg.Window("Inställningar", layout2, finalize=True)
         """
-def file_score_upd(score):
-    file = open("score.txt", "a")   #Öppnar filen score.txt, skriver
-    file.write(str(score)+"\n")
-    file.close()
-file_score_upd(score)
 
+file_score_upd(score)
 
 
 window.close()
