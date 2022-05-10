@@ -7,15 +7,20 @@ from open_hiscore import open_hiscore
 #from word_eva import answer_list_converter,guess_split   #high score, snyggt uppdelat för A
 
 game = SwedishWordle.Game(5) # skapa ett nytt wordlespel med ord som är 5 långa
+
+main_theme()
+
+"""
 theme = 'Dark Blue'
 sg.theme(theme)
+"""
 
 def TextChar(value, key):
     return sg.Input(value, key=key, font='Courier 22', size=(10,100),  disabled_readonly_background_color='gray', border_width=5,  p=1, enable_events=True, disabled=True)
 
 layout = [
    
-    [sg.Text("Wooordle", font='_21'), sg.Text('Teman: '), sg.B('Dark Purple', key='darkpurple6_button'), sg.B('Light Blue', key='lightblue_button'), sg.B('Bright Colors', key='brightcolors_button'), sg.B('Dark Blue', key='darkblue')], 
+    [sg.Text("Wooordle", font='_21'), sg.Text('Teman: ', font='_19'), sg.B('Dark Purple', key='darkpurple6_button'), sg.B('Light Blue', key='lightblue_button'), sg.B('Bright Colors', key='brightcolors_button'), sg.B('Dark Blue', key='darkblue')], 
     [sg.HorizontalSeparator(color='black')],
     [sg.Text('', key='string1')],
     [sg.HorizontalSeparator(color='black')],
@@ -46,6 +51,12 @@ layout2 = [
     
     ]
 """
+"""
+def make_window(theme):
+    sg.theme(theme)
+    window = sg.Window("Wordle SE", layout, finalize=True)
+    return window
+"""
 window = sg.Window("Wordle SE", layout, finalize=True)
 
 #Definierar top_3 mha funktionen
@@ -59,47 +70,88 @@ def score_update():
 score = 0 #Score på varje enskilt game
 i = 1 #Ta bort, kanske använda "game"
 
+"""
+if event == 'Change Theme':      # Theme button clicked, so get new theme and restart window
+    event, values = sg.Window('Choose Theme',
+    [[sg.Combo(sg.theme_list(), readonly=True, k='-THEME LIST-'), sg.OK(), sg.Cancel()]]
+    ).read(close=True)
+    if event == 'OK': # ---- Switch to your new theme! ---- IMPORTANT PART OF THE PROGRA<
+        window.close()
+        window = make_window(values['-THEME LIST-'])
+"""
+
+def make_window_theme(theme=None):
+    if theme:
+        sg.theme(theme)
+        sg.Window("Wordle SE", layout, finalize=True)
+    
+    layout2 = [[sg.T('This is your layout')],
+              [sg.Button('Ok'), sg.Button('Change Theme'), sg.Button('Exit')]]
+
+    return sg.Window('Pattern for changing theme', layout2)
+
+
+def main_theme():
+    window_theme = make_window_theme()
+
+    while True:
+        event, values = window_theme.read()
+        if event == sg.WINDOW_CLOSED or event == 'Exit':
+            break
+        if event == 'Change Theme':
+            event, values = sg.Window('Choose Theme',
+                                      [[sg.Combo(sg.theme_list(), readonly=True, k='-THEME LIST-'), sg.OK(), sg.Cancel()]]
+                                      ).read(close=True)
+            if event == 'OK':
+                window_theme.close()
+                window = make_window_theme(values['-THEME LIST-'])
+
+    window.close()
 
 while True:
     event, values = window.read()
     guess = values['input_box']
    
     if event == "darkpurple6_button":
-        theme = 'Dark Purple 6'
+        main_theme()
 
     elif event == "lightblue_button":
-        theme = 'Light Blue'
+        main_theme()
     
     elif event == "brightcolors_button":
-        theme = 'Bright Colors'
+        main_theme()
 
     elif event == "darkblue":
-        theme = 'Bright Colors'
+        main_theme()
 
     else:
         if len(guess) != 5 and i <=5 and event == "confirm_button":
             window['string'+str(i)].update("Felaktig längd på ord. Du gissade " + guess + ". Detta spel är om ord som är 5 i längd")
-            continue
+            continue     
+        elif sum(game.Guess(guess)) == 0:
+            window['string'+str(6)].update("Knasvinst län")
+            score_update()
+        
+        elif sum(game.Guess(guess)) != 0 and event == sg.WIN_CLOSED:
+            #värdet 99 ges till den som inte klara spelet, topplista är för de som lyckas
+            score = 99
+            break
 
         elif event == "confirm_button" and i <= 5:
+            guess_split = guess.split()  #Skall bli funktion
+            score = score + sum(game.Guess(guess))
             if i == 5:
                 window['string'+str(6)].update("Choktorsk bram")
                 score_update()
-            answer = game.Guess(guess)
-            guess_split = guess.split()  #Skall bli funktion
-            score = score + sum(answer)
-            window['string'+str(i)].update((answer,guess_split))
+
+            window['string'+str(i)].update((sum(game.Guess(guess)),guess_split))
             score_update()
             i += 1
-
-        elif answer == [0,0,0,0,0]:
-            window['string'+str(6)].update("Knasvinst län")
-            score_update()
+            print(sum(game.Guess)(guess))
+        
+       
             
-        elif answer != [0,0,0,0,0] and event == sg.WIN_CLOSED:
-            #värdet 99 ges till den som inte klara spelet, toppliste är för de som lyckas
-            score = 99
-            break
+
         
         elif event == sg.WIN_CLOSED:
             break

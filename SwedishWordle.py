@@ -14,7 +14,7 @@ class Game(object):
         self.words_in_game = list(filter(lambda x: len(x)==word_length and "-" not in x and " " not in x, self.swedish_words))
         self._word = random.choice(self.words_in_game)
         self.num_guesses = 0
-
+        print(self._word)
     def Guess(self, word_guess):
         """ Ger gissningen mot det dolda ordet som array lika lång som gissat or. En int för varje gissad bokstav. 
                 2 - rätt bokstav på rätt plats
