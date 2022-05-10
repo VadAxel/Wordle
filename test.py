@@ -2,7 +2,6 @@ import PySimpleGUI as sg
 import SwedishWordle
 from start_layout import TextChar
 
-
 #from word_eva import answer_list_converter,guess_split   #high score, snyggt uppdelat för A
 
 game = SwedishWordle.Game(5) # skapa ett nytt wordlespel med ord som är 5 långa
@@ -11,17 +10,15 @@ sg.theme('Dark Blue')
 
 def TextChar(value, key):
     return sg.Input(value, key=key, font='Courier 22', size=(10,100),  disabled_readonly_background_color='gray', border_width=5,  p=1, enable_events=True, disabled=True)
-""""
+"""
 def stringlayout():
     for i in range(7):
         [sg.HorizontalSeparator(color='black')],
         [sg.Text('', key='string'+i)],
-       
-    """ 
+        """
 layout = [
     
-    [sg.Text("Wooordle", font='_21')], 
-    # [sg.B('Inställningar', bind_return_key=True, key='inställningar_button')],
+    [sg.Text("Wooordle", font='_21')],
     [sg.HorizontalSeparator(color='black')],
     [sg.Text('', key='string1')],
     [sg.HorizontalSeparator(color='black')],
@@ -43,17 +40,7 @@ layout = [
     [sg.Text('\n\n\n', font='_ 10', key = 'High_Score')], 
     
     ]
-"""
-layout2 = [
-    
-    [sg.Text("Ändra tema", font='_21')],
-    [sg.HorizontalSeparator(color='black')],
-    [sg.B('Dark Purple', bind_return_key=True, key='darkpurple6_button')], [sg.B('Light Blue', bind_return_key=True, key='lightblue_button')], [sg.B('Bright Colors', bind_return_key=True, key='brightcolors_button')]
-   
-    
-    ]
 
-"""
 window = sg.Window("Wordle SE", layout, finalize=True)
 
 def open_score():
@@ -106,10 +93,7 @@ while True:
     elif event == sg.WIN_CLOSED:
         break
 
-    """
-    if event == "inställningar_button":
-        window_inställningar = sg.Window("Inställningar", layout2, finalize=True)
-        """
+
 def file_score_upd(score):
     file = open("score.txt", "a")   #Öppnar filen score.txt, skriver
     file.write(str(score)+"\n")

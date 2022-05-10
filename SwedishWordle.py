@@ -28,14 +28,17 @@ class Game(object):
 
         if word_guess not in self.words_in_game:
              raise ValueError(f"Felaktigt ord. Du gissade \"{word_guess}\" vilket inte är ett ord i ordlistan.")
+        
+        
         result = []
 
         for i,c in enumerate(word_guess):
             if c == self._word[i]:
-                result.append(2)
+                result.append(0)
             elif c in self._word:
                 result.append(1)
             else:
-                result.append(0)
-             
+                result.append(2)
+
+        
         return result
