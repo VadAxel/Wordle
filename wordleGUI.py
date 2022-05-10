@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 import SwedishWordle
 from file_score_upd import file_score_upd
 from open_hiscore import open_hiscore
-from score_output import score_output
+#from score_output import score_output
 
 #from word_eva import answer_list_converter,guess_split   #high score, snyggt uppdelat för A
 
@@ -23,7 +23,7 @@ def stringlayout():
        
     """ 
 layout = [
-    
+   
     [sg.Text("Wooordle", font='_21')], 
     [sg.B('Inställningar', key='inställningar_button')],
     [sg.HorizontalSeparator(color='black')],
@@ -74,9 +74,17 @@ i = 1 #Ta bort, kanske använda "game"
 
 while True:
     event, values = window.read()
+    guess = values['input_box']
+   
+    if len(guess) != 5:
+        window['string'+str(i)].update("Felaktig längd på ord. Du gissade " + guess + ". Detta spel är om ord som är 5 i längd")
+        continue
+
     
     if event == "confirm_button" and i <= 5:
-        answer, guess_split = score_output(game, score, values)             
+        answer = game.Guess(guess)
+        guess_split = guess.split()  #Skall bli funktion
+        score = score + sum(answer)
         window['string'+str(i)].update((answer,guess_split))
         score_update()
         i += 1
@@ -84,21 +92,18 @@ while True:
     elif answer == [0,0,0,0,0]:
         window['string'+str(6)].update("Knasvinst län")
         score_update()
-        i += 1
         
     elif answer != [0,0,0,0,0] and event == sg.WIN_CLOSED:
         #värdet 99 ges till den som inte klara spelet, toppliste är för de som lyckas
         score = 99
         break
- 
-    elif i == 6:
-        window['string'+str(6)].update("Choktorsk bram")
-        score_update()
     
     elif event == sg.WIN_CLOSED:
         break
 
-    
+    else:
+        window['string'+str(6)].update("Choktorsk bram")
+        score_update()
 
     """
     if event == "inställningar_button":
