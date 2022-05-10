@@ -76,12 +76,14 @@ while True:
     event, values = window.read()
     guess = values['input_box']
    
-    if len(guess) != 5:
+    if len(guess) != 5 and i <=5:
         window['string'+str(i)].update("Felaktig längd på ord. Du gissade " + guess + ". Detta spel är om ord som är 5 i längd")
         continue
 
-    
-    if event == "confirm_button" and i <= 5:
+    elif event == "confirm_button" and i <= 5:
+        if i == 5:
+            window['string'+str(6)].update("Choktorsk bram")
+            score_update()
         answer = game.Guess(guess)
         guess_split = guess.split()  #Skall bli funktion
         score = score + sum(answer)
@@ -101,11 +103,7 @@ while True:
     elif event == sg.WIN_CLOSED:
         break
 
-    else:
-        window['string'+str(6)].update("Choktorsk bram")
-        score_update()
-
-    """
+"""
     if event == "inställningar_button":
         window_inställningar = sg.Window("Inställningar", layout2, finalize=True)
         """
