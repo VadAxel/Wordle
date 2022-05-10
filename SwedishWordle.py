@@ -24,10 +24,10 @@ class Game(object):
         self.num_guesses += 1
 
         if len(word_guess) != len(self._word):
-             raise ValueError(f"Felaktig längd på ord. Du gissade \"{word_guess}\". Detta spel är om ord som är {len(self._word)} i längd")
+            error_length = (f"Felaktig längd på ord. Du gissade \"{word_guess}\". Detta spel är om ord som är {len(self._word)} i längd")
 
         if word_guess not in self.words_in_game:
-             raise ValueError(f"Felaktigt ord. Du gissade \"{word_guess}\" vilket inte är ett ord i ordlistan.")
+            error_word = (f"Felaktigt ord. Du gissade \"{word_guess}\" vilket inte är ett ord i ordlistan.")
         
         
         result = []
