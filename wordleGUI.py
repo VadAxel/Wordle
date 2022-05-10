@@ -9,7 +9,7 @@ from theme_change import main_theme
 
 game = SwedishWordle.Game(5) # skapa ett nytt wordlespel med ord som är 5 långa
 
-main_theme()
+#main_theme()
 
 """
 theme = 'Dark Blue'
