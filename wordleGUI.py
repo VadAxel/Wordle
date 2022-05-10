@@ -98,6 +98,8 @@ while True:
     elif event == sg.WIN_CLOSED:
         break
 
+    
+
     """
     if event == "inställningar_button":
         window_inställningar = sg.Window("Inställningar", layout2, finalize=True)
