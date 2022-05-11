@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 
+#Layout vid spel
 def layout_func():
     layout = [
     [sg.Text("Wooordle", font='_21')],  
@@ -26,7 +27,7 @@ def layout_func():
         
     return layout
 
-    
+#Layout vid val av tema
 def layout2_func():
     layout2 = [[sg.T('Denna ruta representerar valt tema')],
               [sg.Button('Ok'), sg.Button('Ändra tema'), sg.Button('Avsluta')]]

@@ -5,7 +5,7 @@ def open_hiscore():
     readthefile = file.readlines()      #Läser
     sortedData = sorted(readthefile)    #Sorterar, lägst till störst
     
-    for line in range(3):           #Väljer de tre lägsta värdena
+    for line in range(3):               #Väljer de tre lägsta värdena
         top_list = str("Pos\tPoints\n" + str(line+1)+"\t"+str(sortedData[line])) #Gör till en string
-        top_3 = top_3 + top_list    #uppdaterar top_3
-    return top_3                    #Returnerar top_3
+        top_3 = top_3 + top_list        #uppdaterar top_3
+    return top_3                        #Returnerar top_3
