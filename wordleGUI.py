@@ -10,7 +10,6 @@ from layout import layout2_func
 #skapa ett nytt wordlespel med ord som är 5 långa
 game = SwedishWordle.Game(5)
 
-rocket = 0
 
 def TextChar(value, key):
     return sg.Input(value, key=key, font='Courier 22', size=(10,100), border_width=5,  p=1, enable_events=True, disabled=True)
