@@ -46,20 +46,7 @@ def make_window_theme(theme=None):
         while True:
             event, values = window.read()
             guess = values['input_box']
-            """
-            if event == "darkpurple6_button":
-                main_theme()
-
-            elif event == "lightblue_button":
-                main_theme()
             
-            elif event == "brightcolors_button":
-                main_theme()
-
-            elif event == "darkblue":
-                main_theme()
-            """
-
             #Om ogiltigt ord
             if len(guess) != 5 and i <=5 and event == "confirm_button":
                 window['string'+str(i)].update("Felaktig längd på ord. Du gissade " + guess + ". Detta spel är om ord som är 5 i längd")
