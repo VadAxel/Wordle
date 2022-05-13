@@ -5,38 +5,30 @@ from open_hiscore import open_hiscore
 from layout import layout_func
 from layout import layout2_func
 
-#high score, snyggt uppdelat för A/L
-
-#skapa ett nytt wordlespel med ord som är 5 långa
+#Skapa ett nytt wordlespel med ord som är 5 långa
 game = SwedishWordle.Game(5)
 
 #Definierar grundläggande grafik
 def TextChar(value, key):
     return sg.Input(value, key=key, font='Courier 22', size=(10,100), border_width=5,  p=1, enable_events=True, disabled=True)
 
-#importerar layout för wordleGUI
-layout = layout_func()
-
-#Definierar top_3 mha funktionen
-top_3 = open_hiscore() 
-
 #Funktion för uppdatering av score, för kompression av kod
 def score_update_visual(score, window):
     window['yiscore'].update(score)                                                #Aktuellt score
-    window['High_Score'].update((top_3))                                           #High Score
+    window['High_Score'].update((open_hiscore()))                                  #High Score
 
 def make_window_theme(theme=None):
     if theme:
-        score = 0 #Score på varje enskilt game
-        i = 1 #Ta bort, kanske använda "game"/L
+        score = 0                                                                  #Score på varje enskilt game
+        i = 1                                                                      #Spelsekvens, veriabel för stegen i spelet. (Ta bort, kanske använda "game"/L)
         sg.theme(theme)
-        window = sg.Window("Wordle SE", layout, finalize=True)
+        window = sg.Window("Wordle SE", layout_func(), finalize=True)
         while True:
             event, values = window.read()
             guess = values['input_box']                                            #Input från användare får en variabel
 
                 #Om ogiltigt ord
-            if len(guess) != 5 and i <=5 and event == "confirm_button":
+            if len(guess) != 5 and i <= 5 and event == "confirm_button":
                 window['string'+str(i)].update("Felaktig längd på ord. Du gissade " + guess + ". Detta spel är om ord som är 5 i längd")
                 continue 
               
