@@ -17,9 +17,9 @@ class Game(object):
         print(self._word)
     def Guess(self, word_guess):
         """ Ger gissningen mot det dolda ordet som array lika lång som gissat or. En int för varje gissad bokstav. 
-                2 - rätt bokstav på rätt plats
+                0 - rätt bokstav på rätt plats
                 1 - bokstaven finns i ordet
-                0 - bokstaven finns ej i ordet
+                2 - bokstaven finns ej i ordet
         """
         self.num_guesses += 1
 
