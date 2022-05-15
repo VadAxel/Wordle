@@ -1,6 +1,6 @@
 def result_text_func(result):
     result_text = []
-    for i in range(5):
+    for i in range(len(result)-1):
         if result[i] == 0:
             result_text.append("rätt")
         elif result[i] == 1:
