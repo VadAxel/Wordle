@@ -31,6 +31,7 @@ def main_func():
     window = sg.Window("Wordle SE", layout_func(), finalize=True)
     
     while True:
+        
         event, values = window.read()
         guess = values['input_box']                                            #Input från användare får en variabel
         result = game.Guess(guess)
@@ -51,7 +52,7 @@ def main_func():
 
                 if event == sg.WINDOW_CLOSED or event == 'Exit':
                     break
-                
+
                 if event == 'Ändra tema':
                     event, values = sg.Window('Ändra tema',[[sg.Combo(sg.theme_list(), readonly=True, k='-THEME LIST-'), sg.OK(), sg.Cancel()]]).read(close=True)
                     
