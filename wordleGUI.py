@@ -6,6 +6,9 @@ from layout import layout_func
 from layout import layout2_func
 from result_text_func import result_text_func
 
+#Skapa ett nytt wordlespel med ord som är 5 långa
+game = SwedishWordle.Game(5)
+
 #Definierar grundläggande grafik
 def TextChar(value, key):
     return sg.Input(value, key=key, font='Courier 22', size=(10,100), border_width=5,  p=1, enable_events=True, disabled=True)
@@ -16,8 +19,7 @@ def visual_score_update(score, window):
     window['High_Score'].update((open_hiscore()))                              #High Score
 
 #Hanterar skapandet av fönster
-def wordle_func():
-    
+def wordle_func():  
     score = 0                                                                  #Score på varje enskilt game
     i = 1                                                                      #Spelsekvens, veriabel för stegen i spelet. (Ta bort, kanske använda "game"/L)
     sg.theme('Dark blue')                                                      
@@ -55,7 +57,7 @@ def wordle_func():
                         window.close()
                         sg.theme(values['-THEME LIST-'])
                         window = sg.Window("Wordle SE", layout_func(), finalize=True)
-
+                        
         #Nytt spel
         elif event == "new_game_button":
             window.close()
@@ -88,3 +90,5 @@ def wordle_func():
         #Om man stänger wordle
         elif event == sg.WIN_CLOSED:
             window.close()
+
+
