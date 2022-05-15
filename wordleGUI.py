@@ -18,7 +18,7 @@ def score_update_visual(score, window):
     window['yiscore'].update(score)                                                #Aktuellt score
     window['High_Score'].update((open_hiscore()))                                  #High Score
 
-def settings_func(theme=None):
+def settings_func():
     layout2 = layout2_func()
     return sg.Window('Wordle Wizard', layout2)
 
@@ -34,9 +34,7 @@ def main_func():
         event, values = window.read()
         guess = values['input_box']                                            #Input från användare får en variabel
         result = game.Guess(guess)
-        #visualresult = guess_colors()
         text_output = result_text_func(result)
-
 
         #Om ogiltigt ord
         if len(guess) != 5 and i <= 5 and event == "confirm_button":
@@ -48,13 +46,14 @@ def main_func():
             
             #Funktioner för olika knapptryck för wordle wizard
             while True:
+
                 event, values = window_theme.read()
+
                 if event == sg.WINDOW_CLOSED or event == 'Exit':
                     break
                 if event == 'Ändra tema':
-                    event, values = sg.Window('Ändra tema',
-                                    [[sg.Combo(sg.theme_list(), readonly=True, k='-THEME LIST-'), sg.OK(), sg.Cancel()]]
-                                    ).read(close=True)
+                    event, values = sg.Window('Ändra tema',[[sg.Combo(sg.theme_list(), readonly=True, k='-THEME LIST-'), sg.OK(), sg.Cancel()]]).read(close=True)
+                    
                     #Startar make_window_theme funktionen med valt tema
                     if event == 'OK':
                         window_theme.close()
@@ -89,6 +88,5 @@ def main_func():
         #Om man stänger wordle
         elif event == sg.WIN_CLOSED:
             window.close()
-
 
 main_func()
