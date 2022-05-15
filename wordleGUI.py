@@ -42,7 +42,6 @@ def wordle_func():
             
             #Funktioner för olika knapptryck för wordle wizard
             while True:
-
                 event, values = window_theme.read()
 
                 if event == sg.WINDOW_CLOSED or event == 'Exit':
@@ -76,15 +75,15 @@ def wordle_func():
             
         #Vanlig gissning
         elif event == "confirm_button" and i <= len(result):           
+            
             #Om gränsen för antalet gissningar överskrids, förlorar du
             if i == len(result):
                 window['string'+str(6)].update("Choktorsk bram")
                 visual_score_update(score, window)                              #Grafik uppdateras för score
             
-            #Grafisk validering av gissade ordet
-            guess_split = guess.split()                                         #Skall bli funktion
+            #Grafisk validering av gissade ordet                                        
             score = score + sum(result)                                         #Score uppdateras
-            window['string'+str(i)].update((text_output,guess_split))           #Grafik uppdateras för svar
+            window['string'+str(i)].update((text_output,guess))                 #Grafik uppdateras för svar
             visual_score_update(score, window)                                  #Grafik uppdateas för score
             i += 1
             

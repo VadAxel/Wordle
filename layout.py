@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 
 #Layout vid spel
 def layout_func():
+
     layout = [
     [sg.Text("Wooordle", font='_21')],   
     [sg.HorizontalSeparator(color='black')],
@@ -33,6 +34,8 @@ def layout_func():
 
 #Layout vid val av tema
 def layout2_func():
+
     layout2 = [[sg.T('Denna ruta representerar valt tema, om du vill spela direkt, tryck OK')],
-              [sg.Button('Ok'), sg.Button('Ändra tema'), sg.Button('Avsluta')]]
+    [sg.Button('Ok'), sg.Button('Ändra tema'), sg.Button('Avsluta')]]
+
     return layout2
