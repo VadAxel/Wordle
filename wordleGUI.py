@@ -80,6 +80,7 @@ def wordle_func():
             if i == len(result):
                 window['string'+str(6)].update("Choktorsk bram")
                 visual_score_update(score, window)                              #Grafik uppdateras för score
+            
             #Grafisk validering av gissade ordet
             guess_split = guess.split()                                         #Skall bli funktion
             score = score + sum(result)                                         #Score uppdateras
