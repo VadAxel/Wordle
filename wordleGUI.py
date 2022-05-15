@@ -51,6 +51,7 @@ def main_func():
 
                 if event == sg.WINDOW_CLOSED or event == 'Exit':
                     break
+                
                 if event == 'Ändra tema':
                     event, values = sg.Window('Ändra tema',[[sg.Combo(sg.theme_list(), readonly=True, k='-THEME LIST-'), sg.OK(), sg.Cancel()]]).read(close=True)
                     
