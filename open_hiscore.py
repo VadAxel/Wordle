@@ -1,4 +1,3 @@
-
 def open_hiscore():
     top_3 = ""                          #definierar top_3
     file = open("score.txt", "r")       #Öppnar

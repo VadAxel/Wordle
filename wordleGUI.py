@@ -6,9 +6,6 @@ from layout import layout_func
 from layout import layout2_func
 from result_text_func import result_text_func
 
-#Skapa ett nytt wordlespel med ord som är 5 långa
-game = SwedishWordle.Game(5)
-
 #Definierar grundläggande grafik
 def TextChar(value, key):
     return sg.Input(value, key=key, font='Courier 22', size=(10,100), border_width=5,  p=1, enable_events=True, disabled=True)
@@ -18,16 +15,12 @@ def score_update_visual(score, window):
     window['yiscore'].update(score)                                                #Aktuellt score
     window['High_Score'].update((open_hiscore()))                                  #High Score
 
-def settings_func():
-    layout2 = layout2_func()
-    return sg.Window('Wordle Wizard', layout2)
-
 #Hanterar skapandet av fönster
 def main_func():
     
     score = 0                                                                  #Score på varje enskilt game
     i = 1     
-    sg.theme('Dark blue')                                                                 #Spelsekvens, veriabel för stegen i spelet. (Ta bort, kanske använda "game"/L)
+    sg.theme('Dark blue')                                                      #Spelsekvens, veriabel för stegen i spelet. (Ta bort, kanske använda "game"/L)
     window = sg.Window("Wordle SE", layout_func(), finalize=True)
     
     while True:
@@ -43,7 +36,7 @@ def main_func():
 
         #Inställningar    
         elif event == "settings_button":
-            window_theme = settings_func() #kanske return sg.Window('Wordle Wizard', layout2_func()) bara
+            window_theme = sg.Window('Wordle Wizard', layout2_func()) #kanske return sg.Window('Wordle Wizard', layout2_func()) bara
             
             #Funktioner för olika knapptryck för wordle wizard
             while True:
@@ -66,7 +59,12 @@ def main_func():
         #Nytt spel
         elif event == "new_game_button":
             window.close()
-            window = sg.Window("Wordle SE", layout_func(), finalize=True)
+
+            #Skapa ett nytt wordlespel med ord som är 5 långa
+            SwedishWordle.Game(5)
+
+            #Starta GUI
+            main_func()
 
         #Vid korrekt svar
         elif sum(result) == 0:                
@@ -75,15 +73,15 @@ def main_func():
             file_score_upd(score) 
             
         #Vanlig gissning
-        elif event == "confirm_button" and i <= 5:           
+        elif event == "confirm_button" and i <= len(result):           
             #Om gränsen för antalet gissningar överskrids, förlorar du
-            if i == 5:
+            if i == len(result):
                 window['string'+str(6)].update("Choktorsk bram")
                 score_update_visual(score, window)                              #Grafik uppdateras för score
             #Grafisk validering av gissade ordet
             guess_split = guess.split()                                         #Skall bli funktion
-            score = score + sum(result)                              #Score uppdateras
-            window['string'+str(i)].update((text_output,guess_split))     #Grafik uppdateras för svar
+            score = score + sum(result)                                         #Score uppdateras
+            window['string'+str(i)].update((text_output,guess_split))           #Grafik uppdateras för svar
             score_update_visual(score, window)                                  #Grafik uppdateas för score
             i += 1
             
@@ -91,4 +89,14 @@ def main_func():
         elif event == sg.WIN_CLOSED:
             window.close()
 
+"""
+def settings_func():
+    layout2 = layout2_func()
+    return sg.Window('Wordle Wizard', layout2) #fråga jonis om detta
+"""
+
+#Skapa ett nytt wordlespel med ord som är 5 långa
+game = SwedishWordle.Game(5)
+
+#Starta GUI
 main_func()
