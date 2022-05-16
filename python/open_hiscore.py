@@ -1,7 +1,7 @@
 def open_hiscore():
 
     top_3 = ""                          #definierar top_3
-    file = open("score.txt", "r")       #Öppnar
+    file = open("C:/Users/axel/Desktop/Prog1/VT Slutprojekt/txt/score.txt", "r")       #Öppnar
     readthefile = file.readlines()      #Läser
     sortedData = sorted(readthefile)    #Sorterar, lägst till störst
     
