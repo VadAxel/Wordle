@@ -14,7 +14,7 @@ Hur gör man?
 
 High score:
 
-* Lägsta poäng (som golf) ger högst placering på listan.
+Lägsta poäng (som golf) ger högst placering på listan.
 
 * Vid fel position, fel bokstav, erhålles: 2p
 * Vid fel position, rätt bokstav, erhålles: 1p
