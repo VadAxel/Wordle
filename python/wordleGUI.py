@@ -83,7 +83,7 @@ def wordle_func():
             
             #Grafisk validering av gissade ordet                                        
             score = score + sum(result)                                         #Score uppdateras
-            window['string'+str(row)].update((text_output,guess))                 #Grafik uppdateras för svar
+            window['string'+str(row)].update((text_output,guess))               #Grafik uppdateras för svar
             visual_score_update(score, window)                                  #Grafik uppdateas för score
             row += 1
             
