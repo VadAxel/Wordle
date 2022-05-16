@@ -22,10 +22,10 @@ High score:
 
 Funktioner:
 
-* main.py startar programmet
-* SwedishWordle.py är grundprogrammet
-* layout.py ger grafikens grundläggande layout
-* wordleGUI.py sköter grafikuppdateringar
-* open_hiscore.py öppnar och läser tidigare high score
-* file_score_upd.py uppdaterar high score (vid vinst)
-* result_text_func.py översätter resultat till användare
+* main.py : startar programmet
+* SwedishWordle.py : är grundprogrammet
+* layout.py : ger grafikens grundläggande layout
+* wordleGUI.py : sköter grafikuppdateringar
+* open_hiscore.py : öppnar och läser tidigare high score
+* file_score_upd.py : uppdaterar high score (vid vinst)
+* result_text_func.py : översätter resultat till användare
