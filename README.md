@@ -4,7 +4,7 @@ Inställningar ger dig en möjlighet att ändra tema, Nytt Spel ger dig möjligh
 
 Systemkrav:
 
-Python 3, pysimpleGUI
+Python 3, pysimpleGUI, Windows
 
 Hur gör man?
 

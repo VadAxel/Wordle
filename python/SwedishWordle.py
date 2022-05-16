@@ -9,7 +9,7 @@ class Game(object):
         self.Start_new_game(word_length)
 
     def Start_new_game(self, word_length = 5):
-        with open(os.path.join(sys.path[0],'C:/Users/axel/Desktop/Prog1/VT Slutprojekt/json/svenska-ord.json')) as json_file:
+        with open(os.path.join(sys.path[0],'../json/svenska-ord.json')) as json_file:
             self.swedish_words = json.load(json_file)
         self.words_in_game = list(filter(lambda x: len(x)==word_length and "-" not in x and " " not in x, self.swedish_words))
         self._word = random.choice(self.words_in_game)
