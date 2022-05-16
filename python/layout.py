@@ -11,7 +11,7 @@ def layout_func():
     [sg.Text('', key='string2', font='Raleway')],
     [sg.HorizontalSeparator(color='black')],
     [sg.Text('', key='string3', font='Raleway')],
-    [sg.HorizontalSeparator(color='black')],    #Få kortare, en string/L
+    [sg.HorizontalSeparator(color='black')],
     [sg.Text('', key='string4', font='Raleway')],
     [sg.HorizontalSeparator(color='black')],
     [sg.Text('', key='string5', font='Raleway')],
