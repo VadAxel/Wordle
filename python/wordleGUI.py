@@ -13,7 +13,7 @@ game = SwedishWordle.Game(5)
 def TextChar(value, key):
     return sg.Input(value, key=key, font='Courier 22', size=(10,100), border_width=5,  p=1, enable_events=True, disabled=True)
 
-#Funktion för uppdatering av score, för kompression av kod
+#Funktion för grafisk uppdatering av score, för kompression av kod
 def visual_score_update(score, window):
     window['yiscore'].update(score)                                            #Aktuellt score
     window['High_Score'].update((open_hiscore()))                              #High Score
@@ -21,24 +21,24 @@ def visual_score_update(score, window):
 #Hanterar skapandet av fönster
 def wordle_func():  
     score = 0                                                                  #Score på varje enskilt game
-    i = 1                                                                      #Spelsekvens, veriabel för stegen i spelet. (Ta bort, kanske använda "game"/L)
+    row = 1                                                                    #Spelsekvens, variabel för stegen i spelet.
     sg.theme('Dark blue')                                                      
     window = sg.Window("Wordle SE", layout_func(), finalize=True)
     
     while True:
         
         event, values = window.read()                                          #Inleder, window
-        guess = values['input_box']                                            #Input från användare får en variabel
+        guess = values['input_box']                                            #Input från användare får en variabel, separerar logik/grafik
         result = game.Guess(guess)                                             #Result definieras
         text_output = result_text_func(result)                                 #Grafiken för din skrivna text
 
         #Om ogiltigt ord
-        if len(guess) != 5 and i <= 5 and event == "confirm_button":
-            window['string'+str(i)].update("Felaktig längd på ord. Du gissade " + guess + ". Detta spel är om ord som är 5 i längd")
+        if len(guess) != 5 and row <= 5 and event == "confirm_button":
+            window['string'+str(row)].update("Felaktig längd på ord. Du gissade " + guess + ". Detta spel är om ord som är 5 i längd")
 
         #Inställningar    
         elif event == "settings_button":
-            window_theme = sg.Window('Wordle Wizard', layout2_func()) #kanske return sg.Window('Wordle Wizard', layout2_func()) bara
+            window_theme = sg.Window('Wordle Wizard', layout2_func())          #Skapar settings-fönster
             
             #Funktioner för olika knapptryck för wordle wizard
             while True:
@@ -52,7 +52,7 @@ def wordle_func():
                     
                     #Startar make_window_theme funktionen med valt tema
                     if event == 'OK':
-                        window_theme.close()
+                        window_theme.close()                                   
                         window.close()
                         sg.theme(values['-THEME LIST-'])
                         window = sg.Window("Wordle SE", layout_func(), finalize=True)
@@ -74,18 +74,18 @@ def wordle_func():
             file_score_upd(score) 
             
         #Vanlig gissning
-        elif event == "confirm_button" and i <= len(result):           
+        elif event == "confirm_button" and row <= len(result):           
             
             #Om gränsen för antalet gissningar överskrids, förlorar du
-            if i == len(result):
+            if row == len(result):
                 window['string'+str(6)].update("Choktorsk bram")
                 visual_score_update(score, window)                              #Grafik uppdateras för score
             
             #Grafisk validering av gissade ordet                                        
             score = score + sum(result)                                         #Score uppdateras
-            window['string'+str(i)].update((text_output,guess))                 #Grafik uppdateras för svar
+            window['string'+str(row)].update((text_output,guess))                 #Grafik uppdateras för svar
             visual_score_update(score, window)                                  #Grafik uppdateas för score
-            i += 1
+            row += 1
             
         #Om man stänger wordle
         elif event == sg.WIN_CLOSED:
