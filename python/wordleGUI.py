@@ -5,6 +5,7 @@ from open_hiscore import open_hiscore
 from layout import layout_func
 from layout import layout2_func
 from result_text_func import result_text_func
+from change_theme import change_theme
 
 #Skapa ett nytt wordlespel med ord som är 5 långa
 game = SwedishWordle.Game(5)
@@ -40,22 +41,8 @@ def wordle_func():
         elif event == "settings_button":
             window_theme = sg.Window('Wordle Wizard', layout2_func())          #Skapar settings-fönster
             
-            #Funktioner för olika knapptryck för wordle wizard
-            while True:
-                event, values = window_theme.read()
-
-                if event == sg.WINDOW_CLOSED or event == 'Exit':
-                    break
-
-                if event == 'Ändra tema':
-                    event, values = sg.Window('Ändra tema',[[sg.Combo(sg.theme_list(), readonly=True, k='-THEME LIST-'), sg.OK(), sg.Cancel()]]).read(close=True)
-                    
-                    #Startar make_window_theme funktionen med valt tema
-                    if event == 'OK':
-                        window_theme.close()                                   
-                        window.close()
-                        sg.theme(values['-THEME LIST-'])
-                        window = sg.Window("Wordle SE", layout_func(), finalize=True)
+            #Funktioner för olika knapptryck för wordle wizard, ändra färg
+            window, event = change_theme(window, window_theme)
                         
         #Nytt spel
         elif event == "new_game_button":
@@ -90,5 +77,7 @@ def wordle_func():
         #Om man stänger wordle
         elif event == sg.WIN_CLOSED:
             window.close()
+
+
 
 

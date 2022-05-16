@@ -29,3 +29,4 @@ Funktioner:
 * open_hiscore.py : öppnar och läser tidigare high score
 * file_score_upd.py : uppdaterar high score (vid vinst)
 * result_text_func.py : översätter resultat till användare
+* change_theme.py : ruta för uppdatering av tema/färger
