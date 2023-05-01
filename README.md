@@ -8,7 +8,7 @@ Python 3, pysimpleGUI, Windows
 
 Senaste Release:
 
-https://github.com/VadAxel/Wordle/releases/tag/Wordle
+* https://github.com/VadAxel/Wordle/releases/tag/Wordle
 
 Hur gör man?
 
